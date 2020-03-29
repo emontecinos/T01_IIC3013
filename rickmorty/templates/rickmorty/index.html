@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+{% extends 'base.html' %}
+
+{% load static %}
+<head></head>
+<body>
+{% block content %}
+<h1>Episodes </h1>
+{% if episode_list%}
+    <table>
+        <tr>
+            <th>Episode</th>
+            <th>Air Date</th>
+            <th>Episode Code</th>
+        </tr>
+        {% for episode in episode_list %}
+            <tr>
+                <td><a href="{% url 'episode_detail' episode.api_id %}">{{ episode.name }}</a></td>
+                <td>{{episode.air_date}}</td>  
+                <td>{{episode.ep_code}}</td>  
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No episodes are available.</p>
+{% endif %}
+{% endblock %}
+</body>
+</html>
+    

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    {% extends 'base.html' %}
+    {% load static %}
+    <head></head>
+
+    <body>
+        {% block content %}
+        <p>{{text}}</p>
+        <div class="row">
+            <div class="column2">
+                <table>
+                    <tr>
+                        <th>Episode</th>
+                    </tr>
+                    {% if episode_dict %}
+                        {% for id,name in episode_dict.items %}
+                        <tr>
+                            <td><a href="{% url 'episode_detail' id %}">{{ name }}</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td>There is no episode &#8249{{ text }}&#8250.</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+            <div class="column2">
+                <table>
+                    <tr>
+                        <th>Character</th>
+                    </tr>
+                    {% if character_dict %}
+                        {% for id,name in character_dict.items %}
+                        <tr>
+                            <td><a href="{% url 'character_detail' id %}">{{ name }}</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td>There is no character &#8249{{ text }}&#8250.</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+            <div class="column2">
+                <table>
+                    <tr>
+                        <th>Location</th>
+                    </tr>
+                    {% if location_dict %}
+                        {% for id,name in location_dict.items %}
+                        <tr>
+                            <td><a href="{% url 'location_detail' id %}">{{ name }}</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td>There is no location &#8249{{ text }}&#8250.</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,1 @@
+web: gunicorn rmsyte.wsgi --log-file -

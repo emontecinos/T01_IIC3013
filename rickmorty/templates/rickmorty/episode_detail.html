@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+{% extends 'base.html' %}
+
+{% load static %}
+<head>
+</head>
+<body>
+    {% block content %}
+<h1>{{ episode.name}}</h1>
+<div class="row">
+    <div class="column">
+        <p>Air date: {{ episode.air_date}}</p>
+        <p>Episode Code: {{ episode.ep_code}}</p>
+    </div>
+
+    <div class="column">
+        <table style="width:100%">
+        <tr>
+            <th>Characters</th>
+        </tr>
+        {% for character in character_list %}
+            <tr>
+                <td><a href="{% url 'character_detail' character.api_id %}">{{ character.name }}</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+</div>
+{% endblock %}
+</body>
+</html>

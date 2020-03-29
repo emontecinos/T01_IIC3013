@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'rickmorty/style.css' %}">
+    <title>{% block title %}Las Trepidantes Aventuras de Ricardo y Mortimer {% endblock %}</title>
+</head>
+
+<body>
+  <div class="topnav">
+    <a class="active" href="/">Las Trepidantes Aventuras de Ricardo y Mortimer</a>
+    <div class="search-container">
+      <form action="{% url 'search' %}" method="get">
+        <input type="text" placeholder="..." name="search">
+        <button type="submit">search</button>
+      </form>
+    </div>
+  </div>
+  <p class="white_space_navbar"></p>
+    <div id="content">
+        {% block content %}{% endblock %}
+      </div>
+    
+      <div id="footer">
+        {% block footer %}
+        Desarrollado por Eduardo Montecinos
+        {% endblock %}
+      </div>
+</body>
+
+</html>

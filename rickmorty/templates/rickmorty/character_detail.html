@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+{% extends 'base.html' %}
+{% load static %}
+<head>
+</head>
+<body>
+    {% block content %}
+    <div class="row">
+        <div class="column">
+            <img src={{character.image}} alt="char_img">
+            <h1>{{character.name}}</h1>
+            <p>Status: {{character.status}}</p>
+            <p>Especies: {{character.species}}</p>
+            <p>Type: {{character.char_type}}</p>
+            <p>Gender: {{ character.gender}}</p>
+            {% if origin_id %}
+                <p>Origin: <a href="{%url 'location_detail' origin_id %}">{{  origin_name  }}</a> </p>
+            {% else %}
+                <p>Origin: {{  origin_name  }}</p>
+            {% endif %}
+            {% if location_id %}
+            <p>Last seen at: <a href="{%url 'location_detail' location_id %}">{{  location_name  }}</a> </p>
+            {% else %}
+                <p>Last seen at: {{  location_name  }} </p>
+            {% endif %}
+        </div>
+        <div class="column">
+            {% if episodes_ids_names %} 
+                <table style="width:100%">
+                    <tr>
+                        <th>Episode</th>
+                    </tr>
+                    {% for eid, ename in episodes_ids_names.items %}
+                        <tr>
+                            <td><a href="{% url 'episode_detail' eid %}">{{ ename }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No episodes are available.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

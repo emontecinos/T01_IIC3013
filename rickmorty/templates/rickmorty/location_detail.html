@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+{% extends 'base.html' %}
+{% load static %}
+<head>
+</head>
+<body>
+    {% block content %}
+    <div class="row">
+        <div class="column">
+            <h1>{{ location.name}}</h1>
+            <p>Type: {{location.loc_type}}</p>
+            <p>Dimension: {{location.dimension}}</p>
+        </div>
+        <div class="column">
+            {% if character_list%}
+                <table style="width:100%">
+                    <tr>
+                        <th>Character</th>
+                    </tr>
+                    {% for id,name in character_list.items %}
+                        <tr>
+                            <td><a href="{% url 'character_detail' id %}">{{ name }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+            <p>No episodes are available.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
