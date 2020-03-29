@@ -6,7 +6,7 @@ import json
 
 
 def index(request):
-    eps_json=get_episodes()
+    eps_json=get_all_episodes()
     episode_list = []
     for ep in eps_json:
         char_list = []
@@ -82,20 +82,20 @@ def search(request):
     #episodios
     text = request.GET.get("search")
     ep_dic={}
-    e=get_episode("")
-    for e_url in e["results"]:
+    e=get_all_episodes()
+    for e_url in e:
         if text.upper() in e_url["name"].upper():
             ep_dic[e_url["id"]]=e_url["name"]
     #characters
     ch_dic={}
-    c=get_characters('')
-    for c_url in c["results"]:
+    c=get_all_characters()
+    for c_url in c:
         if text.upper() in c_url["name"].upper():
             ch_dic[c_url["id"]]=c_url["name"]
     #locations
     lo_dic={}
-    l=get_location('')
-    for l_url in l["results"]:
+    l=get_all_locations()
+    for l_url in l:
         if text.upper() in l_url["name"].upper():
             lo_dic[l_url["id"]]=l_url["name"]
 
@@ -110,25 +110,48 @@ def search(request):
 
 ##Requests de la busqueda
 def generate_request(url,params={}):
+    res=[]
     response = requests.get(url,params=params)
     if response.status_code==200:
         data = json.loads(response.text.encode("utf-8"))
         return data
 
-def get_episodes(params={}):
-    response = generate_request('https://rickandmortyapi.com/api/episode/',params)
+def get_all_episodes(params={}):
+    response =generate_request('https://rickandmortyapi.com/api/episode/',params)
+    res = response["results"]
+    while response["info"]["next"]!="":
+        response=generate_request(response["info"]["next"],params)
+        res+=response["results"]
     if response:
-        return response["results"]
+        return res
 
 def get_episode(ep_id):
     response = generate_request('https://rickandmortyapi.com/api/episode/{}'.format(ep_id))
     if response:
         return response
 
+def get_all_characters(params={}):
+    response =generate_request('https://rickandmortyapi.com/api/character/',params)
+    res = response["results"]
+    while response["info"]["next"]!="":
+        response=generate_request(response["info"]["next"],params)
+        res+=response["results"]
+    if response:
+        return res
+
 def get_characters(chars_ids):
     response = generate_request('https://rickandmortyapi.com/api/character/{}'.format(chars_ids))
     if response:
         return response
+
+def get_all_locations(params={}):
+    response =generate_request('https://rickandmortyapi.com/api/location/',params)
+    res = response["results"]
+    while response["info"]["next"]!="":
+        response=generate_request(response["info"]["next"],params)
+        res+=response["results"]
+    if response:
+        return res
 
 def get_location(location_id):
     response = response = generate_request('https://rickandmortyapi.com/api/location/{}'.format(location_id))
