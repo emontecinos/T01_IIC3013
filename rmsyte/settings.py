@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['ricardo-mortimer-app.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'rickmorty.apps.RickmortyConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
