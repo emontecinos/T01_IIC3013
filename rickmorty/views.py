@@ -117,7 +117,7 @@ def generate_request(url,params={}):
         return data
 
 def get_all_episodes(params={}):
-    response =generate_request('https://rickandmortyapi.com/api/episode/',params)
+    response =generate_request('https://integracion-rick-morty-api.herokuapp.com/api/episode/',params)
     res = response["results"]
     while response["info"]["next"]!="":
         response=generate_request(response["info"]["next"],params)
@@ -126,12 +126,12 @@ def get_all_episodes(params={}):
         return res
 
 def get_episode(ep_id):
-    response = generate_request('https://rickandmortyapi.com/api/episode/{}'.format(ep_id))
+    response = generate_request('https://integracion-rick-morty-api.herokuapp.com/api/episode/{}'.format(ep_id))
     if response:
         return response
 
 def get_all_characters(params={}):
-    response =generate_request('https://rickandmortyapi.com/api/character/',params)
+    response =generate_request('https://integracion-rick-morty-api.herokuapp.com/api/character/',params)
     res = response["results"]
     while response["info"]["next"]!="":
         response=generate_request(response["info"]["next"],params)
@@ -140,12 +140,12 @@ def get_all_characters(params={}):
         return res
 
 def get_characters(chars_ids):
-    response = generate_request('https://rickandmortyapi.com/api/character/{}'.format(chars_ids))
+    response = generate_request('https://integracion-rick-morty-api.herokuapp.com/api/character/{}'.format(chars_ids))
     if response:
         return response
 
 def get_all_locations(params={}):
-    response =generate_request('https://rickandmortyapi.com/api/location/',params)
+    response =generate_request('https://integracion-rick-morty-api.herokuapp.com/api/location/',params)
     res = response["results"]
     while response["info"]["next"]!="":
         response=generate_request(response["info"]["next"],params)
@@ -154,6 +154,6 @@ def get_all_locations(params={}):
         return res
 
 def get_location(location_id):
-    response = response = generate_request('https://rickandmortyapi.com/api/location/{}'.format(location_id))
+    response = response = generate_request('https://integracion-rick-morty-api.herokuapp.com/api/location/{}'.format(location_id))
     if response:
         return response
